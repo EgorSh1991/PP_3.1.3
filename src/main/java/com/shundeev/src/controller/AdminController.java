@@ -30,9 +30,9 @@ public class AdminController {
     public String allUsers(Model model) {
         User user = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        model.addAttribute("allUsers", userService.allUsers());
+        model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("user", user);
-        model.addAttribute("roles", roleService.listRoles());
+        model.addAttribute("roles", roleService.getListRoles());
         return "index";
     }
 
@@ -41,16 +41,16 @@ public class AdminController {
                           User user) {
         Set<Role> roleList = new HashSet<>();
         for (Long id : idRoles) {
-            roleList.add(roleService.getRoleById(id));
+            roleList.add(roleService.findRoleById(id));
         }
         user.setRoles(roleList);
-        userService.add(user);
+        userService.addNewUser(user);
         return "redirect:/admin";
     }
 
     @DeleteMapping("/admin/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
-        userService.delete(id);
+        userService.deleteUserById(id);
         return "redirect:/admin";
     }
 
@@ -59,10 +59,10 @@ public class AdminController {
                              @RequestParam("listRoles") List<Long> rolesId) {
         Set<Role> listRoles = new HashSet<>();
         for (Long idRole : rolesId) {
-            listRoles.add(roleService.getRoleById(idRole));
+            listRoles.add(roleService.findRoleById(idRole));
         }
         user.setRoles(listRoles);
-        userService.edit(user);
+        userService.editUser(user);
         return "redirect:/admin";
     }
 }

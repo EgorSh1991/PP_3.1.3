@@ -23,37 +23,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> allUsers() {
-        return userDAO.allUsers();
+    public List<User> getAllUsers() {
+        return userDAO.getAllUsers();
     }
 
     @Transactional
     @Override
-    public void add(User user) {
+    public void addNewUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        userDAO.add(user);
+        userDAO.addNewUser(user);
     }
 
     @Transactional
     @Override
-    public void delete(Long id) {
-        userDAO.delete(id);
+    public void deleteUserById(Long id) {
+        userDAO.deleteUserById(id);
     }
 
     @Transactional
     @Override
-    public void edit(User user) {
-        String oldPassword = getUserById(user.getId()).getPassword();
+    public void editUser(User user) {
+        String oldPassword = findUserById(user.getId()).getPassword();
         String newPassword = user.getPassword();
         if (!oldPassword.equals(newPassword)) {
             user.setPassword(encoder.encode(user.getPassword()));
         }
-        userDAO.edit(user);
+        userDAO.editUser(user);
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userDAO.getUserById(id);
+    public User findUserById(Long id) {
+        return userDAO.findUserById(id);
     }
 
     @Override

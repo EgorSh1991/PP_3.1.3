@@ -4,28 +4,27 @@ import com.shundeev.src.dao.RoleDAO;
 import com.shundeev.src.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    private RoleDAO roleDAO;
+    private final RoleDAO roleDAO;
 
     @Autowired
-    public void setUserDAO(RoleDAO roleDAO) {
+    public RoleServiceImpl(RoleDAO roleDAO) {
         this.roleDAO = roleDAO;
     }
 
     @Override
-    public List<Role> listRoles() {
+    public List<Role> getListRoles() {
         return roleDAO.listRoles();
     }
 
     @Override
-    public Role getRoleById(Long id) {
-        return roleDAO.getRoleById(id);
+    public Role findRoleById(Long id) {
+        return roleDAO.findRoleById(id);
     }
 
     @Override

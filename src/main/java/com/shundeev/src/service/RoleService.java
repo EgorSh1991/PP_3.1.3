@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface RoleService {
 
-    List<Role> listRoles();
+    List<Role> getListRoles();
 
-    Role getRoleById(Long id);
+    Role findRoleById(Long id);
 
     Role findRoleByName(String roleName);
 

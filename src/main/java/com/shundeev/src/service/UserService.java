@@ -1,20 +1,19 @@
 package com.shundeev.src.service;
 
 import com.shundeev.src.models.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> allUsers();
+    List<User> getAllUsers();
 
-    void add(User user);
+    void addNewUser(User user);
 
-    void delete(Long id);
+    void deleteUserById(Long id);
 
-    void edit(User user);
+    void editUser(User user);
 
-    User getUserById(Long id);
+    User findUserById(Long id);
 
     User findUserByEmail(String email);
 
